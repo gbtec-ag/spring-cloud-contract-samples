@@ -279,7 +279,7 @@ have a base class with fully qualified name equal to the value you specify).
             </baseClassMapping>
             <baseClassMapping>
                 <contractPackageRegex>.*rest.*</contractPackageRegex>
-                <baseClassFQN>com.example.BeerRestBase</baseClassFQN>
+                <baseClassFQN>com.example.rest.BeerRestBase</baseClassFQN>
             </baseClassMapping>
         </baseClassMappings>
         <!-- We want to use the JAR with contracts with the following coordinates -->
@@ -317,7 +317,7 @@ contracts {
 	basePackageForTests = "com.example"
 	baseClassMappings {
 		baseClassMapping(".*messaging.*", "com.example.BeerMessagingBase")
-		baseClassMapping(".*rest.*", "com.example.BeerRestBase")
+		baseClassMapping(".*rest.*", "com.example.rest.BeerRestBase")
 	}
 }
 ----
@@ -376,7 +376,7 @@ following snippet:
             </baseClassMapping>
             <baseClassMapping>
                 <contractPackageRegex>.*rest.*</contractPackageRegex>
-                <baseClassFQN>com.example.BeerRestBase</baseClassFQN>
+                <baseClassFQN>com.example.rest.BeerRestBase</baseClassFQN>
             </baseClassMapping>
         </baseClassMappings>
         <!-- We want to use the JAR with contracts with the following coordinates -->
@@ -408,7 +408,7 @@ contracts {
 	basePackageForTests = "com.example"
 	baseClassMappings {
 		baseClassMapping(".*messaging.*", "com.example.BeerMessagingBase")
-		baseClassMapping(".*rest.*", "com.example.BeerRestBase")
+		baseClassMapping(".*rest.*", "com.example.rest.BeerRestBase")
 	}
 }
 ----

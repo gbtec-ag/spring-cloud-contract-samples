@@ -89,7 +89,7 @@
 						<version>+</version>
 					</contractDependency>
 					<contractsMode>REMOTE</contractsMode>
-					<baseClassForTests>com.example.BeerRestBase</baseClassForTests>
+					<baseClassForTests>com.example.rest.BeerRestBase</baseClassForTests>
 				</configuration>
 				<dependencies>
 					<dependency>

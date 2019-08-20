@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.3">
-<title>Contracts on the Producer Side 2.1.0.BUILD-SNAPSHOT</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
-<style>
+    <meta charset="UTF-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Asciidoctor 1.5.3">
+    <title>Contracts on the Producer Side 2.1.0.BUILD-SNAPSHOT</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+    <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
 /* Remove comment around @import statement below when using as a custom stylesheet */
 /*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
@@ -415,8 +417,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .print-only{display:block!important}
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
-</style>
-<style>
+
+    </style>
+    <style>
 .hidden {
 	display: none;
 }
@@ -440,9 +443,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 	background-color: #7a2519;
 	color: #ffffff;
 }
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
-<script type="text/javascript">
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+    <script type="text/javascript">
 function addBlockSwitches() {
 	$('.primary').each(function() {
 		primary = $(this);
@@ -488,242 +492,265 @@ function createSwitchItem(block, blockSwitch) {
 }
 
 $(addBlockSwitches);
-</script>
+
+    </script>
 </head>
 
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Contracts on the Producer Side 2.1.0.BUILD-SNAPSHOT</h1>
-<div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_scenarios">Scenarios</a></li>
-<li><a href="#_flow">Flow</a></li>
-<li><a href="#_tutorial">Tutorial</a>
-<ul class="sectlevel2">
-<li><a href="#_consumer_flow_1">Consumer flow 1</a>
-<ul class="sectlevel3">
-<li><a href="#_ide_setup">IDE setup</a></li>
-<li><a href="#_cloning_the_producer_s_code">Cloning the producer&#8217;s code</a></li>
-<li><a href="#_adding_dependencies_in_the_producer_s_clone">Adding dependencies in the producer&#8217;s clone</a></li>
-<li><a href="#_defining_first_code_foo_consumer_code_http_contract">Defining first <code>foo-consumer</code> HTTP contract</a></li>
-<li><a href="#_defining_the_second_code_foo_consumer_code_http_contract">Defining the Second <code>foo-consumer</code> HTTP Contract</a></li>
-<li><a href="#_defining_code_bar_consumer_code_http_contracts">Defining <code>bar-consumer</code> HTTP contracts</a></li>
-<li><a href="#_setting_up_the_spring_cloud_contract_plugin_on_the_producer_side">Setting up the Spring Cloud Contract plugin on the producer side</a></li>
-<li><a href="#_writing_missing_implementation_on_the_consumer_side">Writing missing implementation on the consumer side</a></li>
-<li><a href="#_turning_on_stub_runner_in_consumer_tests">Turning on Stub Runner in Consumer Tests</a></li>
-</ul>
-</li>
-<li><a href="#_producer_flow_1">Producer flow 1</a>
-<ul class="sectlevel3">
-<li><a href="#_ide_setup_2">IDE setup</a></li>
-<li><a href="#_setting_up_the_spring_cloud_contract_plugin">Setting up the Spring Cloud Contract plugin</a></li>
-<li><a href="#_generating_tests_from_contracts">Generating tests from contracts</a></li>
-<li><a href="#_fixing_broken_http_tests">Fixing broken HTTP tests</a></li>
-</ul>
-</li>
-<li><a href="#_consumer_flow_2">Consumer flow 2</a></li>
-<li><a href="#_generating_documentation_from_contracts">Generating documentation from contracts</a></li>
-</ul>
-</li>
-<li><a href="#_solutions">Solutions</a>
-<ul class="sectlevel2">
-<li><a href="#_written_consumer_tests">Written consumer tests</a></li>
-<li><a href="#_adding_spring_cloud_contract_dependency">Adding Spring Cloud Contract Dependency</a></li>
-<li><a href="#_proposal_of_simple_contracts_by_consumer">Proposal of simple contracts by consumer</a></li>
-<li><a href="#_missing_consumer_controller_code">Missing consumer controller code</a></li>
-<li><a href="#_stub_logs">Stub Logs</a></li>
-<li><a href="#_beer_request">Beer Request</a></li>
-<li><a href="#_missing_listener_code">Missing listener code</a></li>
-<li><a href="#_missing_triggers">Missing triggers</a></li>
-<li><a href="#_messaging_dsls">Messaging DSLs</a></li>
-<li><a href="#_producercontroller_implementation">ProducerController implementation</a></li>
-<li><a href="#_beerrestbase">BeerRestBase</a></li>
-<li><a href="#_beermessagingbase">BeerMessagingBase</a></li>
-<li><a href="#_messaging_implementation">Messaging implementation</a></li>
-<li><a href="#_foo_consumer_contracts">Foo-consumer contracts</a></li>
-<li><a href="#_bar_consumer_contracts">Bar-consumer contracts</a></li>
-<li><a href="#_stubs_per_consumer_beercontroller">Stubs Per Consumer BeerController</a></li>
-<li><a href="#_producercontroller_for_stubs_per_consumer_implementation">ProducerController for stubs per consumer implementation</a></li>
-</ul>
-</li>
-<li><a href="#_back_to_the_main_page">Back to the Main Page</a></li>
-</ul>
-</div>
+    <h1>Contracts on the Producer Side 2.1.0.BUILD-SNAPSHOT</h1>
+    <div id="toc" class="toc2">
+        <div id="toctitle">Table of Contents</div>
+        <ul class="sectlevel1">
+            <li><a href="#_scenarios">Scenarios</a></li>
+            <li><a href="#_flow">Flow</a></li>
+            <li><a href="#_tutorial">Tutorial</a>
+                <ul class="sectlevel2">
+                    <li><a href="#_consumer_flow_1">Consumer flow 1</a>
+                        <ul class="sectlevel3">
+                            <li><a href="#_ide_setup">IDE setup</a></li>
+                            <li><a href="#_cloning_the_producer_s_code">Cloning the producer&#8217;s code</a></li>
+                            <li><a href="#_adding_dependencies_in_the_producer_s_clone">Adding dependencies in the producer&#8217;s
+                                clone</a></li>
+                            <li><a href="#_defining_first_code_foo_consumer_code_http_contract">Defining first
+                                <code>foo-consumer</code> HTTP contract</a></li>
+                            <li><a href="#_defining_the_second_code_foo_consumer_code_http_contract">Defining the Second <code>foo-consumer</code>
+                                HTTP Contract</a></li>
+                            <li><a href="#_defining_code_bar_consumer_code_http_contracts">Defining <code>bar-consumer</code> HTTP
+                                contracts</a></li>
+                            <li><a href="#_setting_up_the_spring_cloud_contract_plugin_on_the_producer_side">Setting up the Spring
+                                Cloud Contract plugin on the producer side</a></li>
+                            <li><a href="#_writing_missing_implementation_on_the_consumer_side">Writing missing implementation on
+                                the consumer side</a></li>
+                            <li><a href="#_turning_on_stub_runner_in_consumer_tests">Turning on Stub Runner in Consumer Tests</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#_producer_flow_1">Producer flow 1</a>
+                        <ul class="sectlevel3">
+                            <li><a href="#_ide_setup_2">IDE setup</a></li>
+                            <li><a href="#_setting_up_the_spring_cloud_contract_plugin">Setting up the Spring Cloud Contract
+                                plugin</a></li>
+                            <li><a href="#_generating_tests_from_contracts">Generating tests from contracts</a></li>
+                            <li><a href="#_fixing_broken_http_tests">Fixing broken HTTP tests</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#_consumer_flow_2">Consumer flow 2</a></li>
+                    <li><a href="#_generating_documentation_from_contracts">Generating documentation from contracts</a></li>
+                </ul>
+            </li>
+            <li><a href="#_solutions">Solutions</a>
+                <ul class="sectlevel2">
+                    <li><a href="#_written_consumer_tests">Written consumer tests</a></li>
+                    <li><a href="#_adding_spring_cloud_contract_dependency">Adding Spring Cloud Contract Dependency</a></li>
+                    <li><a href="#_proposal_of_simple_contracts_by_consumer">Proposal of simple contracts by consumer</a></li>
+                    <li><a href="#_missing_consumer_controller_code">Missing consumer controller code</a></li>
+                    <li><a href="#_stub_logs">Stub Logs</a></li>
+                    <li><a href="#_beer_request">Beer Request</a></li>
+                    <li><a href="#_missing_listener_code">Missing listener code</a></li>
+                    <li><a href="#_missing_triggers">Missing triggers</a></li>
+                    <li><a href="#_messaging_dsls">Messaging DSLs</a></li>
+                    <li><a href="#_producercontroller_implementation">ProducerController implementation</a></li>
+                    <li><a href="#_beerrestbase">BeerRestBase</a></li>
+                    <li><a href="#_beermessagingbase">BeerMessagingBase</a></li>
+                    <li><a href="#_messaging_implementation">Messaging implementation</a></li>
+                    <li><a href="#_foo_consumer_contracts">Foo-consumer contracts</a></li>
+                    <li><a href="#_bar_consumer_contracts">Bar-consumer contracts</a></li>
+                    <li><a href="#_stubs_per_consumer_beercontroller">Stubs Per Consumer BeerController</a></li>
+                    <li><a href="#_producercontroller_for_stubs_per_consumer_implementation">ProducerController for stubs per
+                        consumer implementation</a></li>
+                </ul>
+            </li>
+            <li><a href="#_back_to_the_main_page">Back to the Main Page</a></li>
+        </ul>
+    </div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this tutorial, we keep the contracts together with the producer code. Each consumer
-defines the contracts in a dedicated folder. For the same requests, the consumers expect
-different responses.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_scenarios">Scenarios</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We must write the following features:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/scenario_stubs_per_consumer_1.png" alt="scenario stubs per consumer 1">
-</div>
-<div class="title">Figure 1. Unofficially addresses the person by name for positive beer selling via HTTP</div>
-</div>
-<div class="paragraph">
-<p>&#160;
-&#160;</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/scenario_stubs_per_consumer_2.png" alt="scenario stubs per consumer 2">
-</div>
-<div class="title">Figure 2. Unofficially addresses the person by name for negative beer selling via HTTP</div>
-</div>
-<div class="paragraph">
-<p>&#160;
-&#160;</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/scenario_stubs_per_consumer_3.png" alt="scenario stubs per consumer 3">
-</div>
-<div class="title">Figure 3. Officially addresses the person by surname for positive beer selling via HTTP</div>
-</div>
-<div class="paragraph">
-<p>&#160;
-&#160;</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/scenario_stubs_per_consumer_4.png" alt="scenario stubs per consumer 4">
-</div>
-<div class="title">Figure 4. Officially addresses the person by surname for negative beer selling via HTTP</div>
-</div>
-<div class="paragraph">
-<p>&#160;
-&#160;</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_flow">Flow</h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="../images/flow.png" alt="flow">
-</div>
-<div class="title">Figure 5. Consumer Driven Contract Flow</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tutorial">Tutorial</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Consumer Driven Contracts are like TDD in terms of architecture. We start by writing a
-test on the consumer side. This time, we simulate in our single code base as if we had
-two separate consumers. Normally, both consumers would have their own code bases, but,
-for the sake of demonstration, we try to keep things simple.</p>
-</div>
-<div class="sect2">
-<h3 id="_consumer_flow_1">Consumer flow 1</h3>
-<div class="imageblock">
-<div class="content">
-<img src="../images/consumer_flow_1.png" alt="consumer flow 1">
-</div>
-<div class="title">Figure 6. Interact with cloned producer code</div>
-</div>
-<div class="sect3">
-<h4 id="_ide_setup">IDE setup</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>In your IDE, open the <code>consumer_with_stubs_per_consumer</code> project (either via Maven or
-Gradle)</p>
-</li>
-<li>
-<p>We have the following objectives for HTTP:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>As a consumer with name <code>foo-service</code>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>For a client with a certain <code>name</code> and <code>age</code>, we ask the producer to verify whether
-the person is eligible to get the beer.</p>
-</li>
-<li>
-<p>We expect to retrieve the <code>status</code> and the <code>name</code> of the client.</p>
-</li>
-<li>
-<p>Depending on the <code>status</code>, we either accept or decline giving a beer.</p>
-</li>
-<li>
-<p>Since we have a friendly service, we address the client by <code>MY DEAR FRIEND</code> and then
-use the person&#8217;s <code>name</code>.</p>
-</li>
-<li>
-<p>If the person (for example, with the name, <code>marcin</code>) can get the beer then we say
-<code>THERE YOU GO MY DEAR FRIEND [marcin]</code>.</p>
-</li>
-<li>
-<p>Otherwise, we say <code>GET LOST MY DEAR FRIEND [marcin]</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>As a consumer with name <code>bar-service</code>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>For the client with a certain <code>name</code> and <code>age</code>, we ask the producer to verify whether
-the person is eligible to get the beer.</p>
-</li>
-<li>
-<p>We expect to retrieve the <code>status</code> and the <code>surname</code> of the client (for simplicity we
-receive the provided <code>name</code> as <code>surname</code>).</p>
-</li>
-<li>
-<p>Depending on the <code>status</code>, we either accept or decline giving a beer.</p>
-</li>
-<li>
-<p>Since we have a very official service, we address the client by <code>MR</code>.</p>
-</li>
-<li>
-<p>If the person (for example, with the name, <code>marcin</code>) can get the beer, then we say
-<code>THERE YOU GO MR [marcin]</code>, Where <code>marcin</code> came back from the producer service as a
-<code>surname</code>.</p>
-</li>
-<li>
-<p>Otherwise, we say <code>GET LOST MR [marcin]</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Normally we would do TDD, but we already have some code ready to speed things up.</p>
-</li>
-<li>
-<p>In the <code>BeerController</code> class, you can see that the implementation of the method is
-missing. We return to that later. For now, you can see that we have a <code>/beer</code> endpoint
-that expects a JSON request body that maps to a <code>Person</code> class.</p>
-</li>
-<li>
-<p>Now open the <code>BeerControllerTest</code> and write the missing test bodies.</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
+    <div id="preamble">
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p>In this tutorial, we keep the contracts together with the producer code. Each consumer
+                    defines the contracts in a dedicated folder. For the same requests, the consumers expect
+                    different responses.</p>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="_scenarios">Scenarios</h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p>We must write the following features:</p>
+            </div>
+            <div class="imageblock">
+                <div class="content">
+                    <img src="../images/scenario_stubs_per_consumer_1.png" alt="scenario stubs per consumer 1">
+                </div>
+                <div class="title">Figure 1. Unofficially addresses the person by name for positive beer selling via HTTP</div>
+            </div>
+            <div class="paragraph">
+                <p>&#160;
+                    &#160;</p>
+            </div>
+            <div class="imageblock">
+                <div class="content">
+                    <img src="../images/scenario_stubs_per_consumer_2.png" alt="scenario stubs per consumer 2">
+                </div>
+                <div class="title">Figure 2. Unofficially addresses the person by name for negative beer selling via HTTP</div>
+            </div>
+            <div class="paragraph">
+                <p>&#160;
+                    &#160;</p>
+            </div>
+            <div class="imageblock">
+                <div class="content">
+                    <img src="../images/scenario_stubs_per_consumer_3.png" alt="scenario stubs per consumer 3">
+                </div>
+                <div class="title">Figure 3. Officially addresses the person by surname for positive beer selling via HTTP</div>
+            </div>
+            <div class="paragraph">
+                <p>&#160;
+                    &#160;</p>
+            </div>
+            <div class="imageblock">
+                <div class="content">
+                    <img src="../images/scenario_stubs_per_consumer_4.png" alt="scenario stubs per consumer 4">
+                </div>
+                <div class="title">Figure 4. Officially addresses the person by surname for negative beer selling via HTTP</div>
+            </div>
+            <div class="paragraph">
+                <p>&#160;
+                    &#160;</p>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="_flow">Flow</h2>
+        <div class="sectionbody">
+            <div class="imageblock">
+                <div class="content">
+                    <img src="../images/flow.png" alt="flow">
+                </div>
+                <div class="title">Figure 5. Consumer Driven Contract Flow</div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="_tutorial">Tutorial</h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p>Consumer Driven Contracts are like TDD in terms of architecture. We start by writing a
+                    test on the consumer side. This time, we simulate in our single code base as if we had
+                    two separate consumers. Normally, both consumers would have their own code bases, but,
+                    for the sake of demonstration, we try to keep things simple.</p>
+            </div>
+            <div class="sect2">
+                <h3 id="_consumer_flow_1">Consumer flow 1</h3>
+                <div class="imageblock">
+                    <div class="content">
+                        <img src="../images/consumer_flow_1.png" alt="consumer flow 1">
+                    </div>
+                    <div class="title">Figure 6. Interact with cloned producer code</div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_ide_setup">IDE setup</h4>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>In your IDE, open the <code>consumer_with_stubs_per_consumer</code> project (either via Maven
+                                    or
+                                    Gradle)</p>
+                            </li>
+                            <li>
+                                <p>We have the following objectives for HTTP:</p>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>As a consumer with name <code>foo-service</code>:</p>
+                                            <div class="ulist">
+                                                <ul>
+                                                    <li>
+                                                        <p>For a client with a certain <code>name</code> and <code>age</code>, we
+                                                            ask the producer to verify whether
+                                                            the person is eligible to get the beer.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>We expect to retrieve the <code>status</code> and the <code>name</code>
+                                                            of the client.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Depending on the <code>status</code>, we either accept or decline
+                                                            giving a beer.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Since we have a friendly service, we address the client by <code>MY
+                                                            DEAR FRIEND</code> and then
+                                                            use the person&#8217;s <code>name</code>.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>If the person (for example, with the name, <code>marcin</code>) can get
+                                                            the beer then we say
+                                                            <code>THERE YOU GO MY DEAR FRIEND [marcin]</code>.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Otherwise, we say <code>GET LOST MY DEAR FRIEND [marcin]</code>.</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>As a consumer with name <code>bar-service</code>:</p>
+                                            <div class="ulist">
+                                                <ul>
+                                                    <li>
+                                                        <p>For the client with a certain <code>name</code> and <code>age</code>,
+                                                            we ask the producer to verify whether
+                                                            the person is eligible to get the beer.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>We expect to retrieve the <code>status</code> and the
+                                                            <code>surname</code> of the client (for simplicity we
+                                                            receive the provided <code>name</code> as <code>surname</code>).</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Depending on the <code>status</code>, we either accept or decline
+                                                            giving a beer.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Since we have a very official service, we address the client by <code>MR</code>.
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p>If the person (for example, with the name, <code>marcin</code>) can get
+                                                            the beer, then we say
+                                                            <code>THERE YOU GO MR [marcin]</code>, Where <code>marcin</code> came
+                                                            back from the producer service as a
+                                                            <code>surname</code>.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Otherwise, we say <code>GET LOST MR [marcin]</code>.</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <p>Normally we would do TDD, but we already have some code ready to speed things up.</p>
+                            </li>
+                            <li>
+                                <p>In the <code>BeerController</code> class, you can see that the implementation of the method is
+                                    missing. We return to that later. For now, you can see that we have a <code>/beer</code>
+                                    endpoint
+                                    that expects a JSON request body that maps to a <code>Person</code> class.</p>
+                            </li>
+                            <li>
+                                <p>Now open the <code>BeerControllerTest</code> and write the missing test bodies.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">	@Test public void should_give_me_a_beer_when_im_old_enough() throws Exception {
 		//remove::start[]
 		mockMvc.perform(MockMvcRequestBuilders.post("/beer")
@@ -743,27 +770,28 @@ that expects a JSON request body that maps to a <code>Person</code> class.</p>
 				.andExpect(content().string("GET LOST MY DEAR FRIEND [marcin]"));
 		//remove::end[]
 	}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>We need to name our consumer somehow. The best way is to provide that value in the
-<code>properties</code> attribute in a <code>SpringBootTest</code> annotation, though you also could pass it
-via a file, such as <code>application.yml</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>We need to name our consumer somehow. The best way is to provide that value in the
+                            <code>properties</code> attribute in a <code>SpringBootTest</code> annotation, though you also could
+                            pass it
+                            via a file, such as <code>application.yml</code>.</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@SpringBootTest(webEnvironment = WebEnvironment.MOCK,
 		properties = {"spring.application.name=foo-consumer"})</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If we run the tests, they fail, because we have no implementation.
-Now open <code>BeerControllerForBarTest</code>. In this test class, we simulate that we are using
-the <code>bar-service</code> and not the <code>foo-service</code>. We can start with the missing test
-implementation.</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>If we run the tests, they fail, because we have no implementation.
+                            Now open <code>BeerControllerForBarTest</code>. In this test class, we simulate that we are using
+                            the <code>bar-service</code> and not the <code>foo-service</code>. We can start with the missing test
+                            implementation.</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">	@Test public void should_give_me_a_beer_when_im_old_enough() throws Exception {
 		//remove::start[]
 		mockMvc.perform(MockMvcRequestBuilders.post("/beer")
@@ -783,105 +811,112 @@ implementation.</p>
 				.andExpect(content().string("GET LOST MR [marcin]"));
 		//remove::end[]
 	}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In this test, we do not set the <code>spring.application.name</code>. We will change the name with
-an attribute in an annotation later.
-Now we want to write an implementation, but the problem is that we do not yet know what
-API we would like to have. Here, we touch the very essence of Consumer Driven
-Contracts. As consumers, we want to drive the change of the API. That is why, <strong>as
-consumers</strong>, we work on the producer code.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_cloning_the_producer_s_code">Cloning the producer&#8217;s code</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>In this tutorial we will not clone the producer&#8217;s code, we&#8217;ll just open it in the IDE</p>
-</li>
-<li>
-<p>There&#8217;s some production code written on the producer side but you could completely remove it. The idea
-of CDC is that defining of contract can be done without writing a single line of code for the feature.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_adding_dependencies_in_the_producer_s_clone">Adding dependencies in the producer&#8217;s clone</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Since we want the IDE to help us with code completion, let&#8217;s add the necessary Spring Cloud Contract
-dependencies. You need to add <code>spring-cloud-starter-contract-verifier</code> as a test dependency</p>
-<div class="listingblock primary">
-<div class="title">Maven</div>
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>In this test, we do not set the <code>spring.application.name</code>. We will change the name with
+                            an attribute in an annotation later.
+                            Now we want to write an implementation, but the problem is that we do not yet know what
+                            API we would like to have. Here, we touch the very essence of Consumer Driven
+                            Contracts. As consumers, we want to drive the change of the API. That is why, <strong>as
+                                consumers</strong>, we work on the producer code.</p>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_cloning_the_producer_s_code">Cloning the producer&#8217;s code</h4>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>In this tutorial we will not clone the producer&#8217;s code, we&#8217;ll just open it in the
+                                    IDE</p>
+                            </li>
+                            <li>
+                                <p>There&#8217;s some production code written on the producer side but you could completely remove
+                                    it. The idea
+                                    of CDC is that defining of contract can be done without writing a single line of code for the
+                                    feature.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_adding_dependencies_in_the_producer_s_clone">Adding dependencies in the producer&#8217;s clone</h4>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Since we want the IDE to help us with code completion, let&#8217;s add the necessary Spring
+                                    Cloud Contract
+                                    dependencies. You need to add <code>spring-cloud-starter-contract-verifier</code> as a test
+                                    dependency</p>
+                                <div class="listingblock primary">
+                                    <div class="title">Maven</div>
+                                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
 	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
 	&lt;artifactId&gt;spring-cloud-starter-contract-verifier&lt;/artifactId&gt;
 	&lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">testCompile("org.springframework.cloud:spring-cloud-starter-contract-verifier")</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>This is a task that you would do once only since when you&#8217;ll be adding next contracts
-all the dependencies will already be added</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_defining_first_code_foo_consumer_code_http_contract">Defining first <code>foo-consumer</code> HTTP contract</h4>
-<div class="paragraph">
-<p>It is time to play with the API Create a <code>src/test/resources/contracts/foo-consumer/rest</code>
-folder. You can define the contracts using Groovy DSL. To create your first HTTP
-contract:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Under the <code>rest</code> folder, create a file called <code>shouldGrantABeerIfOldEnough.groovy</code></p>
-</li>
-<li>
-<p>Call the <code>Contract.make</code> method to start defining the contract.</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
+                                    </div>
+                                </div>
+                                <div class="listingblock secondary">
+                                    <div class="title">Gradle</div>
+                                    <div class="content">
+                                        <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">testCompile("org.springframework.cloud:spring-cloud-starter-contract-verifier")</code></pre>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>This is a task that you would do once only since when you&#8217;ll be adding next contracts
+                                    all the dependencies will already be added</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_defining_first_code_foo_consumer_code_http_contract">Defining first <code>foo-consumer</code> HTTP
+                        contract</h4>
+                    <div class="paragraph">
+                        <p>It is time to play with the API Create a <code>src/test/resources/contracts/foo-consumer/rest</code>
+                            folder. You can define the contracts using Groovy DSL. To create your first HTTP
+                            contract:</p>
+                    </div>
+                    <div class="olist arabic">
+                        <ol class="arabic">
+                            <li>
+                                <p>Under the <code>rest</code> folder, create a file called <code>shouldGrantABeerIfOldEnough.groovy</code>
+                                </p>
+                            </li>
+                            <li>
+                                <p>Call the <code>Contract.make</code> method to start defining the contract.</p>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
 
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can call <code>description()</code> method to provide some meaningful description.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-You can use the Groovy multiline String <code>""" """</code> to have all special characters
-escaped. Every new line in the String is converted into a new line character, as shown in
-the following example:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>You can call <code>description()</code> method to provide some meaningful description.</p>
+                    </div>
+                    <div class="admonitionblock tip">
+                        <table>
+                            <tr>
+                                <td class="icon">
+                                    <div class="title">Tip</div>
+                                </td>
+                                <td class="content">
+                                    You can use the Groovy multiline String <code>""" """</code> to have all special characters
+                                    escaped. Every new line in the String is converted into a new line character, as shown in
+                                    the following example:
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">Contract.make {
 	request {
 		description("""
@@ -897,13 +932,14 @@ then:
 ```
 """)
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now call the <code>request { }</code> and <code>response { }</code> methods, as shown in the following example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Now call the <code>request { }</code> and <code>response { }</code> methods, as shown in the following
+                            example:</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
         some interesting description
@@ -913,27 +949,28 @@ then:
     response {
     }
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s assume that we want to send a <code>POST</code> method. To do so, call <code>method POST()</code> or
-<code>method "POST"</code>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-In Groovy, you do not need to provide parentheses (in most cases). You can write
-either <code>method POST()</code> or <code>method(POST())</code>. The result is the same.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Let&#8217;s assume that we want to send a <code>POST</code> method. To do so, call <code>method
+                            POST()</code> or
+                            <code>method "POST"</code>.</p>
+                    </div>
+                    <div class="admonitionblock tip">
+                        <table>
+                            <tr>
+                                <td class="icon">
+                                    <div class="title">Tip</div>
+                                </td>
+                                <td class="content">
+                                    In Groovy, you do not need to provide parentheses (in most cases). You can write
+                                    either <code>method POST()</code> or <code>method(POST())</code>. The result is the same.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
         some interesting description
@@ -944,13 +981,13 @@ either <code>method POST()</code> or <code>method(POST())</code>. The result is 
     response {
     }
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now we need to provide a URL: <code>/check</code>. We can write <code>url "/check"</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Now we need to provide a URL: <code>/check</code>. We can write <code>url "/check"</code>.</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
         some interesting description
@@ -962,37 +999,41 @@ either <code>method POST()</code> or <code>method(POST())</code>. The result is 
     response {
     }
 }</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Now we need to define the body. We leverage some of Groovy&#8217;s power here, so, if you
-get lost you can always check the <a href="http://groovy-lang.org/json.html">Groovy JSON
-documentation</a>. Let&#8217;s call the <code>body()</code> method with brackets.</p>
-</li>
-<li>
-<p>In Groovy, you can use the map notation this way: <code>[key: "value", secondKey: 2]</code>. In
-the same way, we can describe the body with JSON. We want to send JSON such as the
-following <code>{ "age": 22, "name": "marcin" }</code>. To do so, we can create a map notation of
-<code>[age:22, name:"marcin"]</code>. The <code>body</code> method accepts a map. In Groovy, if a method
-accepts a map, then the <code>[]</code> brackets can be omitted. So you can write either
-<code>body([age:22, name:"marcin"])</code> or <code>body(age:22, name:"marcin")</code>.</p>
-</li>
-<li>
-<p>Let&#8217;s assume that we already want to be more generic about our contract and we want to
-verify that the age is greater than 20 and that name is any alphaunicode character. We
-can use the <code>$()</code> or <code>value()</code> methods that Spring Cloud Contract provides to define
-dynamic behaviour.</p>
-</li>
-<li>
-<p>We use the <code>$(regex(&#8230;&#8203;))</code> method to define the age and the <code>$(anyAlphaUnicode())</code> for
-the name.</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Now we need to define the body. We leverage some of Groovy&#8217;s power here, so, if you
+                                    get lost you can always check the <a href="http://groovy-lang.org/json.html">Groovy JSON
+                                        documentation</a>. Let&#8217;s call the <code>body()</code> method with brackets.</p>
+                            </li>
+                            <li>
+                                <p>In Groovy, you can use the map notation this way: <code>[key: "value", secondKey: 2]</code>. In
+                                    the same way, we can describe the body with JSON. We want to send JSON such as the
+                                    following <code>{ "age": 22, "name": "marcin" }</code>. To do so, we can create a map notation
+                                    of
+                                    <code>[age:22, name:"marcin"]</code>. The <code>body</code> method accepts a map. In Groovy,
+                                    if a method
+                                    accepts a map, then the <code>[]</code> brackets can be omitted. So you can write either
+                                    <code>body([age:22, name:"marcin"])</code> or <code>body(age:22, name:"marcin")</code>.</p>
+                            </li>
+                            <li>
+                                <p>Let&#8217;s assume that we already want to be more generic about our contract and we want to
+                                    verify that the age is greater than 20 and that name is any alphaunicode character. We
+                                    can use the <code>$()</code> or <code>value()</code> methods that Spring Cloud Contract
+                                    provides to define
+                                    dynamic behaviour.</p>
+                            </li>
+                            <li>
+                                <p>We use the <code>$(regex(&#8230;&#8203;))</code> method to define the age and the <code>$(anyAlphaUnicode())</code>
+                                    for
+                                    the name.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents a successful scenario of getting a beer
@@ -1017,14 +1058,14 @@ then:
     response {
     }
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now we can work on the headers, by calling the <code>headers { }</code> method, as shown in the
-following example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Now we can work on the headers, by calling the <code>headers { }</code> method, as shown in the
+                            following example:</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents a successful scenario of getting a beer
@@ -1052,56 +1093,14 @@ then:
     response {
     }
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Inside that method, we want to use the <code>Content-Type: "application/json</code> header. To do
-so, call <code>contentType(applicationJson())</code> methods, as shown in the following example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
-    description("""
-Represents a successful scenario of getting a beer
-
-```
-given:
-	client is old enough
-when:
-	he applies for a beer
-then:
-	we'll grant him the beer
-```
-    """)
-    request {
-        method POST()
-        url "/check"
-        body(
-                age: $(regex("[2-9][0-9]")),
-                name: $(anyAlphaUnicode())
-            )
-        headers {
-            contentType(applicationJson())
-        }
-    }
-    response {
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Congratulations! You defined the contract for the request. Now we can work on the
-response</p>
-</div>
-<div class="paragraph">
-<p>In the <code>response</code> block, we want to define that the status of our response will be 200.
-To do so, call <code>status 200</code>, as shown in the following example:</p>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Inside that method, we want to use the <code>Content-Type: "application/json</code> header. To do
+                            so, call <code>contentType(applicationJson())</code> methods, as shown in the following example:</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents a successful scenario of getting a beer
@@ -1127,58 +1126,23 @@ then:
         }
     }
     response {
-        status 200
     }
 }</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>We want our response to have a body. As you might have guessed, there&#8217;s a <code>body</code> method
-here, too. We can now use another way of defining bodies by using String. (That is the
-less preferred option in Spring Cloud Contract, but it can still be useful.)</p>
-</li>
-<li>
-<p>We want to send back a field called <code>status</code> that will return <code>OK</code> when the person can
-get the beer. The <code>foo-consumer</code> is also interested in getting the name in the response
-from the request.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>To reference the request from the response via the JSON path, you can call the
-<code>fromRequest()</code> method. In the following code snippet, we reference the <code>name</code> field from
-the request: `fromRequest().body('$.name')".</p>
-</li>
-<li>
-<p>In Groovy, when you use a multiline string (<code>""" """</code>), you can call the <code>${}</code>
-interpolation mechanism to call a method from within a String.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-Don&#8217;t confuse the <code>$()</code> from Spring Cloud Contract with the <code>${}</code> interpolation
-mechanism. Call
-<code>body(""" { "status" : "OK", "name": "${fromRequest().body('$.name')}" } """)</code>. That way,
-you can define how the response body looks by providing the exact JSON value, and inside
-that JSON you can also provide dynamic values. In our case, for the <code>name</code> response
-field, we provide the value of <code>name</code> from the request, as shown in the following
-example:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Congratulations! You defined the contract for the request. Now we can work on the
+                            response</p>
+                    </div>
+                    <div class="paragraph">
+                        <p>In the <code>response</code> block, we want to define that the status of our response will be 200.
+                            To do so, call <code>status 200</code>, as shown in the following example:</p>
+                    </div>
+                    <div class="paragraph">
+                        <p>+</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents a successful scenario of getting a beer
@@ -1205,23 +1169,64 @@ then:
     }
     response {
         status 200
-        body("""
-            {
-                "status" : "OK",
-                "name": "${fromRequest().body('$.name')}"
-            }
-        """)
     }
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The last thing to add is the response headers. We do just about exactly the same thing as
-we did previously for the request, as shown here:
-<code>headers { contentType(applicationJson()) }</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>We want our response to have a body. As you might have guessed, there&#8217;s a
+                                    <code>body</code> method
+                                    here, too. We can now use another way of defining bodies by using String. (That is the
+                                    less preferred option in Spring Cloud Contract, but it can still be useful.)</p>
+                            </li>
+                            <li>
+                                <p>We want to send back a field called <code>status</code> that will return <code>OK</code> when
+                                    the person can
+                                    get the beer. The <code>foo-consumer</code> is also interested in getting the name in the
+                                    response
+                                    from the request.</p>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>To reference the request from the response via the JSON path, you can call the
+                                                <code>fromRequest()</code> method. In the following code snippet, we reference the
+                                                <code>name</code> field from
+                                                the request: `fromRequest().body('$.name')".</p>
+                                        </li>
+                                        <li>
+                                            <p>In Groovy, when you use a multiline string (<code>""" """</code>), you can call the
+                                                <code>${}</code>
+                                                interpolation mechanism to call a method from within a String.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="admonitionblock tip">
+                        <table>
+                            <tr>
+                                <td class="icon">
+                                    <div class="title">Tip</div>
+                                </td>
+                                <td class="content">
+                                    Don&#8217;t confuse the <code>$()</code> from Spring Cloud Contract with the <code>${}</code>
+                                    interpolation
+                                    mechanism. Call
+                                    <code>body(""" { "status" : "OK", "name": "${fromRequest().body('$.name')}" } """)</code>.
+                                    That way,
+                                    you can define how the response body looks by providing the exact JSON value, and inside
+                                    that JSON you can also provide dynamic values. In our case, for the <code>name</code> response
+                                    field, we provide the value of <code>name</code> from the request, as shown in the following
+                                    example:
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents a successful scenario of getting a beer
@@ -1254,295 +1259,381 @@ then:
                 "name": "${fromRequest().body('$.name')}"
             }
         """)
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>The last thing to add is the response headers. We do just about exactly the same thing as
+                            we did previously for the request, as shown here:
+                            <code>headers { contentType(applicationJson()) }</code>.</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
+    description("""
+Represents a successful scenario of getting a beer
+
+```
+given:
+	client is old enough
+when:
+	he applies for a beer
+then:
+	we'll grant him the beer
+```
+    """)
+    request {
+        method POST()
+        url "/check"
+        body(
+                age: $(regex("[2-9][0-9]")),
+                name: $(anyAlphaUnicode())
+            )
+        headers {
+            contentType(applicationJson())
+        }
+    }
+    response {
+        status 200
+        body("""
+            {
+                "status" : "OK",
+                "name": "${fromRequest().body('$.name')}"
+            }
+        """)
         headers {
             contentType(applicationJson())
         }
     }
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Congratulations! You have created your first contract!</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_defining_the_second_code_foo_consumer_code_http_contract">Defining the Second <code>foo-consumer</code> HTTP Contract</h4>
-<div class="paragraph">
-<p>Now it&#8217;s time for you to create the second contract. Create a file called
- <code>shouldRejectABeerIfTooYoung.groovy</code>.
-If you get lost, look at the <a href="#_foo_consumer_contracts">solution</a>.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Set the <code>age</code> in the request to the following regular expression <code>[0-1][0-9]</code>.</p>
-</li>
-<li>
-<p>Update the response body to return a <code>status</code> of <code>NOT_OK</code>.</p>
-</li>
-<li>
-<p>Update the description.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_defining_code_bar_consumer_code_http_contracts">Defining <code>bar-consumer</code> HTTP contracts</h4>
-<div class="paragraph">
-<p>Let&#8217;s now move to the <code>bar-consumer</code>. Create a
-<code>src/test/resources/contracts/bar-consumer/rest</code> folder. We will create very similar
-contracts to the <code>foo-consumer</code> one. The only difference is that the response contains a
-<code>surname</code> field instead of a <code>name</code> field. Create 2 files named
-<code>shouldGrantABeerIfOldEnough.groovy</code> and <code>shouldRejectABeerIfTooYoung.groovy</code> and fill
-them out <a href="#_bar_consumer_contracts">or copy from the solution</a>. We have written the
-contracts. It is time to publish some stubs!</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_setting_up_the_spring_cloud_contract_plugin_on_the_producer_side">Setting up the Spring Cloud Contract plugin on the producer side</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Ok, at this moment we&#8217;ve described the API that would be interesting for us, consumers, and most likely
-will suit our needs. We define those contracts cause we want to have some stubs produced for us without
-needing to write a single line of the implementation code. The tool that we need to do this conversion
-is the Spring Cloud Contract plugin. Let&#8217;s add it to the producer&#8217;s <code>pom.xml</code> / <code>build.gradle</code>.</p>
-<div class="listingblock primary">
-<div class="title">Maven</div>
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Congratulations! You have created your first contract!</p>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_defining_the_second_code_foo_consumer_code_http_contract">Defining the Second
+                        <code>foo-consumer</code> HTTP Contract</h4>
+                    <div class="paragraph">
+                        <p>Now it&#8217;s time for you to create the second contract. Create a file called
+                            <code>shouldRejectABeerIfTooYoung.groovy</code>.
+                            If you get lost, look at the <a href="#_foo_consumer_contracts">solution</a>.</p>
+                    </div>
+                    <div class="olist arabic">
+                        <ol class="arabic">
+                            <li>
+                                <p>Set the <code>age</code> in the request to the following regular expression
+                                    <code>[0-1][0-9]</code>.</p>
+                            </li>
+                            <li>
+                                <p>Update the response body to return a <code>status</code> of <code>NOT_OK</code>.</p>
+                            </li>
+                            <li>
+                                <p>Update the description.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_defining_code_bar_consumer_code_http_contracts">Defining <code>bar-consumer</code> HTTP contracts
+                    </h4>
+                    <div class="paragraph">
+                        <p>Let&#8217;s now move to the <code>bar-consumer</code>. Create a
+                            <code>src/test/resources/contracts/bar-consumer/rest</code> folder. We will create very similar
+                            contracts to the <code>foo-consumer</code> one. The only difference is that the response contains a
+                            <code>surname</code> field instead of a <code>name</code> field. Create 2 files named
+                            <code>shouldGrantABeerIfOldEnough.groovy</code> and <code>shouldRejectABeerIfTooYoung.groovy</code>
+                            and fill
+                            them out <a href="#_bar_consumer_contracts">or copy from the solution</a>. We have written the
+                            contracts. It is time to publish some stubs!</p>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_setting_up_the_spring_cloud_contract_plugin_on_the_producer_side">Setting up the Spring Cloud
+                        Contract plugin on the producer side</h4>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Ok, at this moment we&#8217;ve described the API that would be interesting for us, consumers,
+                                    and most likely
+                                    will suit our needs. We define those contracts cause we want to have some stubs produced for
+                                    us without
+                                    needing to write a single line of the implementation code. The tool that we need to do this
+                                    conversion
+                                    is the Spring Cloud Contract plugin. Let&#8217;s add it to the producer&#8217;s
+                                    <code>pom.xml</code> / <code>build.gradle</code>.</p>
+                                <div class="listingblock primary">
+                                    <div class="title">Maven</div>
+                                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
     &lt;artifactId&gt;spring-cloud-contract-maven-plugin&lt;/artifactId&gt;
     &lt;version&gt;${spring-cloud-contract.version}&lt;/version&gt;
     &lt;extensions&gt;true&lt;/extensions&gt;
 &lt;/plugin&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Gradle</div>
-<div class="content">
+                                    </div>
+                                </div>
+                                <div class="listingblock secondary">
+                                    <div class="title">Gradle</div>
+                                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">buildscript {
 	dependencies {
 		classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:${verifierVersion}"
 	}
 }</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The coordinates of the plugin are: <code>org.springframework.cloud:spring-cloud-contract-gradle-plugin:$2.1.0.BUILD-SNAPSHOT</code></p>
-</li>
-<li>
-<p>For this tutorial we&#8217;re using latest snapshot versions that you can reference via the Maven&#8217;s
-<code>${spring-cloud-contract.version}</code> property or Gradle&#8217;s <code>verifierVersion</code> one</p>
-</li>
-<li>
-<p>Once the plugin has been added just call the commands to install the stubs locally</p>
-<div class="listingblock primary">
-<div class="title">Maven</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ ./mvnw clean install -DskipTests</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ ./gradlew clean build publishToMavenLocal -x test</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Now you can check out <code>target/stubs/META-INF/com.example/beer-api-producer-with-stubs-per-consumer/0.0.1-SNAPSHOT</code> for Maven or
-<code>build/stubs/META-INF/com.example/beer-api-producer-with-stubs-per-consumer/0.0.1-SNAPSHOT</code> for Gradle. Over there you&#8217;ll see
-<code>contracts</code> folder where all contracts got copied and the <code>mappings</code> folder where you&#8217;ll find all the
-generated stubs. By default Spring Cloud Contract uses <a href="http://wiremock.org">WireMock</a> as an implementation
-of fake HTTP server. Under the <code>rest</code> subfolder you&#8217;ll see all the generated stubs. Notice that
-we&#8217;re using JSON Paths to check the contents of the request.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_writing_missing_implementation_on_the_consumer_side">Writing missing implementation on the consumer side</h4>
-<div class="paragraph">
-<p>We know what the API should look like. Let&#8217;s go to <code>BeerController</code> and write the
-missing implementation <a href="#_stubs_per_consumer_beercontroller">or copy from the solution</a>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>We want to send a POST HTTP method to <code><a href="http://localhost:8090/check" class="bare">http://localhost:8090/check</a></code>.</p>
-</li>
-<li>
-<p>The JSON body will contain the <code>Person</code> that we received in the controller.</p>
-</li>
-<li>
-<p>Depending on the status (<code>OK</code> or <code>NOT_OK</code>), we send back:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>For <code>OK</code>: <code>THERE YOU GO ` + the result of the `message(body of the response)</code> method.</p>
-</li>
-<li>
-<p>For <code>NOT_OK</code>: <code>GET LOST ` + the result of the `message(body of the response)</code> method.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If we run the <code>BeerControllerTest</code> and <code>BeerControllerForBarTest</code>, they both fail due
-to the connection being refused. Let&#8217;s fix that.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_turning_on_stub_runner_in_consumer_tests">Turning on Stub Runner in Consumer Tests</h4>
-<div class="paragraph">
-<p>Since we managed to install the stubs locally and we now have the missing implementation
-written, we can now go back to the consumer tests. Let&#8217;s add the Spring Cloud Contract
-Stub Runner as a dependency, as shown in the following example:</p>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
-<div class="listingblock primary">
-<div class="title">Maven</div>
-<div class="content">
+                                    </div>
+                                </div>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>The coordinates of the plugin are: <code>org.springframework.cloud:spring-cloud-contract-gradle-plugin:$2.1.0.BUILD-SNAPSHOT</code>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>For this tutorial we&#8217;re using latest snapshot versions that you can reference
+                                                via the Maven&#8217;s
+                                                <code>${spring-cloud-contract.version}</code> property or Gradle&#8217;s <code>verifierVersion</code>
+                                                one</p>
+                                        </li>
+                                        <li>
+                                            <p>Once the plugin has been added just call the commands to install the stubs
+                                                locally</p>
+                                            <div class="listingblock primary">
+                                                <div class="title">Maven</div>
+                                                <div class="content">
+                                                    <pre class="prettyprint highlight"><code class="language-bash"
+                                                                                             data-lang="bash">$ ./mvnw clean install -DskipTests</code></pre>
+                                                </div>
+                                            </div>
+                                            <div class="listingblock secondary">
+                                                <div class="title">Gradle</div>
+                                                <div class="content">
+                                                    <pre class="prettyprint highlight"><code class="language-bash"
+                                                                                             data-lang="bash">$ ./gradlew clean build publishToMavenLocal -x test</code></pre>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>Now you can check out <code>target/stubs/META-INF/com.example/beer-api-producer-with-stubs-per-consumer/0.0.1-SNAPSHOT</code>
+                                                for Maven or
+                                                <code>build/stubs/META-INF/com.example/beer-api-producer-with-stubs-per-consumer/0.0.1-SNAPSHOT</code>
+                                                for Gradle. Over there you&#8217;ll see
+                                                <code>contracts</code> folder where all contracts got copied and the <code>mappings</code>
+                                                folder where you&#8217;ll find all the
+                                                generated stubs. By default Spring Cloud Contract uses <a
+                                                        href="http://wiremock.org">WireMock</a> as an implementation
+                                                of fake HTTP server. Under the <code>rest</code> subfolder you&#8217;ll see all
+                                                the generated stubs. Notice that
+                                                we&#8217;re using JSON Paths to check the contents of the request.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_writing_missing_implementation_on_the_consumer_side">Writing missing implementation on the consumer
+                        side</h4>
+                    <div class="paragraph">
+                        <p>We know what the API should look like. Let&#8217;s go to <code>BeerController</code> and write the
+                            missing implementation <a href="#_stubs_per_consumer_beercontroller">or copy from the solution</a>.
+                        </p>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>We want to send a POST HTTP method to <code><a href="http://localhost:8090/check" class="bare">http://localhost:8090/check</a></code>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>The JSON body will contain the <code>Person</code> that we received in the controller.</p>
+                            </li>
+                            <li>
+                                <p>Depending on the status (<code>OK</code> or <code>NOT_OK</code>), we send back:</p>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>For <code>OK</code>: <code>THERE YOU GO ` + the result of the `message(body of the
+                                                response)</code> method.</p>
+                                        </li>
+                                        <li>
+                                            <p>For <code>NOT_OK</code>: <code>GET LOST ` + the result of the `message(body of the
+                                                response)</code> method.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="paragraph">
+                        <p>If we run the <code>BeerControllerTest</code> and <code>BeerControllerForBarTest</code>, they both fail
+                            due
+                            to the connection being refused. Let&#8217;s fix that.</p>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_turning_on_stub_runner_in_consumer_tests">Turning on Stub Runner in Consumer Tests</h4>
+                    <div class="paragraph">
+                        <p>Since we managed to install the stubs locally and we now have the missing implementation
+                            written, we can now go back to the consumer tests. Let&#8217;s add the Spring Cloud Contract
+                            Stub Runner as a dependency, as shown in the following example:</p>
+                    </div>
+                    <div class="paragraph">
+                        <p>+</p>
+                    </div>
+                    <div class="listingblock primary">
+                        <div class="title">Maven</div>
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
 	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
 	&lt;artifactId&gt;spring-cloud-starter-contract-stub-runner&lt;/artifactId&gt;
 	&lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
-<div class="listingblock secondary">
-<div class="title">Gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">testCompile("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s check out the <code>BeerControllerTest</code> and add the Stub Runner functionality, as shown
-in the following example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>+</p>
+                    </div>
+                    <div class="listingblock secondary">
+                        <div class="title">Gradle</div>
+                        <div class="content">
+                            <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">testCompile("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")</code></pre>
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Let&#8217;s check out the <code>BeerControllerTest</code> and add the Stub Runner functionality, as
+                            shown
+                            in the following example:</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@AutoConfigureStubRunner(stubsMode = StubRunnerProperties.StubsMode.LOCAL,
 		ids = "com.example:beer-api-producer-with-stubs-per-consumer",
 		stubsPerConsumer = true)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can see that we turned on the <code>stubsPerConsumer</code> flag. Doing so means that the path
-of stubs is scanned and only those that contain the value of <code>spring.application.name</code>
-is picked. Now let&#8217;s run the test. It should pass. Let&#8217;s try to fix the
-<code>BeerControllerForBarTest</code>. We do not want to set the <code>spring.application.name</code>. That&#8217;s
-why we will set that name on the <code>@AutoConfigureStubRunner</code> annotation via the
-<code>consumerName</code> property. (Note that we also have to turn on the <code>stubsPerConsumer</code> flag.)</p>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>You can see that we turned on the <code>stubsPerConsumer</code> flag. Doing so means that the path
+                            of stubs is scanned and only those that contain the value of <code>spring.application.name</code>
+                            is picked. Now let&#8217;s run the test. It should pass. Let&#8217;s try to fix the
+                            <code>BeerControllerForBarTest</code>. We do not want to set the <code>spring.application.name</code>.
+                            That&#8217;s
+                            why we will set that name on the <code>@AutoConfigureStubRunner</code> annotation via the
+                            <code>consumerName</code> property. (Note that we also have to turn on the
+                            <code>stubsPerConsumer</code> flag.)</p>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@AutoConfigureStubRunner(stubsMode = StubRunnerProperties.StubsMode.LOCAL,
 		ids = "com.example:beer-api-producer-with-stubs-per-consumer",
 		stubsPerConsumer = true,
 		consumerName = "bar-consumer")</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Congratulations! As a consumer, you successfully used the API of the producer for both
-HTTP and messaging. Now we can file a pull request (PR) to their code to propose a
-contract. Let&#8217;s switch to the producer side.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_producer_flow_1">Producer flow 1</h3>
-<div class="imageblock">
-<div class="content">
-<img src="../images/producer_flow_1.png" alt="producer flow 1">
-</div>
-<div class="title">Figure 7. Producer takes over the PR, writes missing impl and merges the PR</div>
-</div>
-<div class="sect3">
-<h4 id="_ide_setup_2">IDE setup</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Open in your IDE the <code>producer</code> project (either via Maven or Gradle)</p>
-</li>
-<li>
-<p>We&#8217;re assuming that we&#8217;ve taken over the PR. Example of how to achieve that in "real life" for a PR
-that got submitted to via a branch called <code>the_pr</code> looks like this:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Congratulations! As a consumer, you successfully used the API of the producer for both
+                            HTTP and messaging. Now we can file a pull request (PR) to their code to propose a
+                            contract. Let&#8217;s switch to the producer side.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_producer_flow_1">Producer flow 1</h3>
+                <div class="imageblock">
+                    <div class="content">
+                        <img src="../images/producer_flow_1.png" alt="producer flow 1">
+                    </div>
+                    <div class="title">Figure 7. Producer takes over the PR, writes missing impl and merges the PR</div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_ide_setup_2">IDE setup</h4>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Open in your IDE the <code>producer</code> project (either via Maven or Gradle)</p>
+                            </li>
+                            <li>
+                                <p>We&#8217;re assuming that we&#8217;ve taken over the PR. Example of how to achieve that in
+                                    "real life" for a PR
+                                    that got submitted to via a branch called <code>the_pr</code> looks like this:</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listingblock">
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">git fetch origin
 git checkout -b the_pr origin/the_pr
 git merge master</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The idea of Spring Cloud Contract is about stub and contract validity. Right now we have a set of
-contracts defined but we haven&#8217;t tested it against the producer side. Time to change that!</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_setting_up_the_spring_cloud_contract_plugin">Setting up the Spring Cloud Contract plugin</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Spring Cloud Contract can generate tests from your contracts to ensure that your implementation&#8217;s API
-is compatible with the defined contract. Let&#8217;s set up the project to start generating tests.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Spring Cloud Contract needs a base class that all of the generated tests will extend. Currently
-we support 3 different ways of defining a base class (you can read more about this in the
-Spring Cloud Contract documentation for <a href="https://cloud.spring.io/spring-cloud-contract/spring-cloud-contract.html#_configure_plugin">Gradle</a>
-and <a href="https://cloud.spring.io/spring-cloud-contract/spring-cloud-contract.html#_configure_plugin_2">Maven</a>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>a single class for all tests</p>
-</li>
-<li>
-<p>convention based naming (takes 2 last package names and appends <code>Base</code>. Having a contract
-<code>src/test/resources/contracts/foo/bar/shouldDoSth.groovy</code> would create a test class called
-<code>BarTest</code> that would extend <code>FooBarBase</code> class.</p>
-</li>
-<li>
-<p>manual mapping (you can state that contracts matching certain regular expression will have to
-have a base class with fully qualified name equal to X)</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In our situation, we use the mapping approach. Let&#8217;s set the following base classes for
-our contracts, as shown in the following example:</p>
-</div>
-<div class="listingblock primary">
-<div class="title">Maven</div>
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>The idea of Spring Cloud Contract is about stub and contract validity. Right now we have a set
+                                    of
+                                    contracts defined but we haven&#8217;t tested it against the producer side. Time to change
+                                    that!</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_setting_up_the_spring_cloud_contract_plugin">Setting up the Spring Cloud Contract plugin</h4>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Spring Cloud Contract can generate tests from your contracts to ensure that your implementation&#8217;s
+                                    API
+                                    is compatible with the defined contract. Let&#8217;s set up the project to start generating
+                                    tests.</p>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>Spring Cloud Contract needs a base class that all of the generated tests will
+                                                extend. Currently
+                                                we support 3 different ways of defining a base class (you can read more about this
+                                                in the
+                                                Spring Cloud Contract documentation for <a
+                                                        href="https://cloud.spring.io/spring-cloud-contract/spring-cloud-contract.html#_configure_plugin">Gradle</a>
+                                                and
+                                                <a href="https://cloud.spring.io/spring-cloud-contract/spring-cloud-contract.html#_configure_plugin_2">Maven</a>)
+                                            </p>
+                                            <div class="ulist">
+                                                <ul>
+                                                    <li>
+                                                        <p>a single class for all tests</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>convention based naming (takes 2 last package names and appends <code>Base</code>.
+                                                            Having a contract
+                                                            <code>src/test/resources/contracts/foo/bar/shouldDoSth.groovy</code>
+                                                            would create a test class called
+                                                            <code>BarTest</code> that would extend <code>FooBarBase</code> class.
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p>manual mapping (you can state that contracts matching certain regular
+                                                            expression will have to
+                                                            have a base class with fully qualified name equal to X)</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="paragraph">
+                        <p>In our situation, we use the mapping approach. Let&#8217;s set the following base classes for
+                            our contracts, as shown in the following example:</p>
+                    </div>
+                    <div class="listingblock primary">
+                        <div class="title">Maven</div>
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
     &lt;artifactId&gt;spring-cloud-contract-maven-plugin&lt;/artifactId&gt;
@@ -1552,110 +1643,121 @@ our contracts, as shown in the following example:</p>
         &lt;baseClassMappings&gt;
             &lt;baseClassMapping&gt;
                 &lt;contractPackageRegex&gt;.*rest.*&lt;/contractPackageRegex&gt;
-                &lt;baseClassFQN&gt;com.example.BeerRestBase&lt;/baseClassFQN&gt;
+                &lt;baseClassFQN&gt;com.example.rest.BeerRestBase&lt;/baseClassFQN&gt;
             &lt;/baseClassMapping&gt;
         &lt;/baseClassMappings&gt;
     &lt;/configuration&gt;
 &lt;/plugin&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Gradle</div>
-<div class="content">
+                        </div>
+                    </div>
+                    <div class="listingblock secondary">
+                        <div class="title">Gradle</div>
+                        <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">contracts {
 	baseClassMappings {
-		baseClassMapping(".*rest.*", "com.example.BeerRestBase")
+		baseClassMapping(".*rest.*", "com.example.rest.BeerRestBase")
 	}
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_generating_tests_from_contracts">Generating tests from contracts</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Let&#8217;s generate the tests! Just call:</p>
-<div class="listingblock primary">
-<div class="title">Maven</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ ./mvnw clean install</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ ./gradlew clean build publishToMavenLocal</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Suddenly some tests should start failing. Those tests are the autogenerated tests created
-by Spring Cloud Contract</p>
-</li>
-<li>
-<p>The tests lay under <code>/generated-test-sources/contracts/org/springframework/cloud/contract/verifier/tests/beer</code>
-in <code>target</code> for Maven or <code>build</code> for Gradle</p>
-</li>
-<li>
-<p>There will be a test for each folder in which you store your contracts. The name of the test class
-will be the name of that folder</p>
-</li>
-<li>
-<p>Each of the contracts will be a single test inside that test class</p>
-</li>
-<li>
-<p>If you check out the generated tests you&#8217;ll notice that the dynamic parts of the <code>request</code> part
-of the contract got converted to a concrete value. Any dynamic bits on the <code>response</code> side would be
-converted into matchers.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Time to fix the broken tests. We need to do that by providing the missing implementation.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_fixing_broken_http_tests">Fixing broken HTTP tests</h4>
-<div class="paragraph">
-<p>Let&#8217;s start with HTTP. First, let&#8217;s write the missing implementation in
-<code>ProducerController</code>. The logic to be written is as follows: If the
-<code>personCheckingService.shouldGetBeer(&#8230;&#8203;)</code> returns <code>true</code>, then we should return
-<code>new Response(BeerCheckStatus.OK, personToCheck.name)</code>. Otherwise, we should return
-<code>new Response(BeerCheckStatus.NOT_OK, personToCheck.name)</code>.
-(<a href="#_producerController_for_stubs_per_consumer_implementation">Show solution</a>).</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Let&#8217;s fix the <code>BeerRestBase</code> class now</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The idea of CDC is <strong>NOT TO TEST</strong> every single feature. Contract tests are there to see if the API
-is matched, <strong>NOT</strong> that the feature is working. That&#8217;s why we shouldn&#8217;t be accessing databases etc.
-That means that we will work with mock of the <code>PersonCheckingService</code>. (<a href="#_beerrestbase">Show solution</a>)</p>
-</li>
-<li>
-<p>Let&#8217;s annotate the test class with <code>@RunWith(MockitoJUnitRunner.class)</code> to enable Mockito runner.</p>
-<div class="listingblock">
-<div class="content">
+                        </div>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_generating_tests_from_contracts">Generating tests from contracts</h4>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Let&#8217;s generate the tests! Just call:</p>
+                                <div class="listingblock primary">
+                                    <div class="title">Maven</div>
+                                    <div class="content">
+                                        <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ ./mvnw clean install</code></pre>
+                                    </div>
+                                </div>
+                                <div class="listingblock secondary">
+                                    <div class="title">Gradle</div>
+                                    <div class="content">
+                                        <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ ./gradlew clean build publishToMavenLocal</code></pre>
+                                    </div>
+                                </div>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>Suddenly some tests should start failing. Those tests are the autogenerated tests
+                                                created
+                                                by Spring Cloud Contract</p>
+                                        </li>
+                                        <li>
+                                            <p>The tests lay under <code>/generated-test-sources/contracts/org/springframework/cloud/contract/verifier/tests/beer</code>
+                                                in <code>target</code> for Maven or <code>build</code> for Gradle</p>
+                                        </li>
+                                        <li>
+                                            <p>There will be a test for each folder in which you store your contracts. The name of
+                                                the test class
+                                                will be the name of that folder</p>
+                                        </li>
+                                        <li>
+                                            <p>Each of the contracts will be a single test inside that test class</p>
+                                        </li>
+                                        <li>
+                                            <p>If you check out the generated tests you&#8217;ll notice that the dynamic parts of
+                                                the <code>request</code> part
+                                                of the contract got converted to a concrete value. Any dynamic bits on the <code>response</code>
+                                                side would be
+                                                converted into matchers.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <p>Time to fix the broken tests. We need to do that by providing the missing implementation.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="_fixing_broken_http_tests">Fixing broken HTTP tests</h4>
+                    <div class="paragraph">
+                        <p>Let&#8217;s start with HTTP. First, let&#8217;s write the missing implementation in
+                            <code>ProducerController</code>. The logic to be written is as follows: If the
+                            <code>personCheckingService.shouldGetBeer(&#8230;&#8203;)</code> returns <code>true</code>, then we
+                            should return
+                            <code>new Response(BeerCheckStatus.OK, personToCheck.name)</code>. Otherwise, we should return
+                            <code>new Response(BeerCheckStatus.NOT_OK, personToCheck.name)</code>.
+                            (<a href="#_producerController_for_stubs_per_consumer_implementation">Show solution</a>).</p>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Let&#8217;s fix the <code>BeerRestBase</code> class now</p>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>The idea of CDC is <strong>NOT TO TEST</strong> every single feature. Contract
+                                                tests are there to see if the API
+                                                is matched, <strong>NOT</strong> that the feature is working. That&#8217;s why we
+                                                shouldn&#8217;t be accessing databases etc.
+                                                That means that we will work with mock of the <code>PersonCheckingService</code>.
+                                                (<a href="#_beerrestbase">Show solution</a>)</p>
+                                        </li>
+                                        <li>
+                                            <p>Let&#8217;s annotate the test class with
+                                                <code>@RunWith(MockitoJUnitRunner.class)</code> to enable Mockito runner.</p>
+                                            <div class="listingblock">
+                                                <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@RunWith(MockitoJUnitRunner.class)
 public abstract class BeerRestBase {
 ...
 }</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>We&#8217;ll want to test the <code>ProducerController</code> so we can create a field <code>@InjectMocks ProducerController
-producerController</code>. Mockito will inject any mocks for us via the constructor.</p>
-<div class="listingblock">
-<div class="content">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>We&#8217;ll want to test the <code>ProducerController</code> so we can create a
+                                                field <code>@InjectMocks ProducerController
+                                                    producerController</code>. Mockito will inject any mocks for us via the
+                                                constructor.</p>
+                                            <div class="listingblock">
+                                                <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">    @Mock PersonCheckingService personCheckingService;
     @InjectMocks ProducerController producerController;
 
@@ -1663,15 +1765,17 @@ producerController</code>. Mockito will inject any mocks for us via the construc
     public void setup() {
         given(personCheckingService.shouldGetBeer(argThat(oldEnough()))).willReturn(true);
     }</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>It won&#8217;t compile cause we don&#8217;t have the <code>oldEnough()</code> method but don&#8217;t worry. So this line stubs
-the <code>shouldGetBeer</code> method in such a way that if the user is old enough then the method will return
-true. Let&#8217;s now add the <code>oldEnoughMethod()</code></p>
-<div class="listingblock">
-<div class="content">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>It won&#8217;t compile cause we don&#8217;t have the <code>oldEnough()</code>
+                                                method but don&#8217;t worry. So this line stubs
+                                                the <code>shouldGetBeer</code> method in such a way that if the user is old enough
+                                                then the method will return
+                                                true. Let&#8217;s now add the <code>oldEnoughMethod()</code></p>
+                                            <div class="listingblock">
+                                                <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">	private TypeSafeMatcher&lt;PersonToCheck&gt; oldEnough() {
 		return new TypeSafeMatcher&lt;PersonToCheck&gt;() {
 			@Override protected boolean matchesSafely(PersonToCheck personToCheck) {
@@ -1681,19 +1785,24 @@ true. Let&#8217;s now add the <code>oldEnoughMethod()</code></p>
 			}
 		};
 	}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>We&#8217;re using the <code>TypeSafeMatcher</code> from Hamcrest to create a matcher for <code>PersonToCheck</code>. In this case
-if the person to check is older or is 20 then the method <code>shouldGetBeer</code> method will return <code>true</code>.</p>
-</li>
-<li>
-<p>Now we need to configure <a href="http://rest-assured.io/">RestAssured</a> that is used by Spring Cloud Contract
-to send requests. In our case we want to profit from MockMvc. In order to set the <code>ProducerController</code>
-with RestAssured it&#8217;s enough to call <code>RestAssuredMockMvc.standaloneSetup(producerController);</code></p>
-<div class="listingblock">
-<div class="content">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>We&#8217;re using the <code>TypeSafeMatcher</code> from Hamcrest to create a
+                                                matcher for <code>PersonToCheck</code>. In this case
+                                                if the person to check is older or is 20 then the method
+                                                <code>shouldGetBeer</code> method will return <code>true</code>.</p>
+                                        </li>
+                                        <li>
+                                            <p>Now we need to configure <a href="http://rest-assured.io/">RestAssured</a> that is
+                                                used by Spring Cloud Contract
+                                                to send requests. In our case we want to profit from MockMvc. In order to set the
+                                                <code>ProducerController</code>
+                                                with RestAssured it&#8217;s enough to call <code>RestAssuredMockMvc.standaloneSetup(producerController);</code>
+                                            </p>
+                                            <div class="listingblock">
+                                                <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@RunWith(MockitoJUnitRunner.class)
 public abstract class BeerRestBase {
 
@@ -1716,68 +1825,72 @@ public abstract class BeerRestBase {
         };
     }
 }</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>With mocks and RestAssured setup - we&#8217;re ready to run our HTTP based autogenerated tests</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Now you can merge the pull request to <code>master</code> and your CI system can build a fat jar and
-the stubs.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Important</div>
-</td>
-<td class="content">
-Per consumer stubs is a powerful feature. On the producer side, if you want to
-remove a field from the response, you can quickly verify if gets used. Try removing
-the <code>surname</code> field from the <code>Response</code> class. You can see that the generated <code>RestTest</code>
-in the <code>bar-consumer</code> subfolder fails. That means that the <code>bar-consumer</code> requires the
-<code>surname</code> field and that you can&#8217;t safely remove it. On the other hand, in production,
-both consumers receive more fields than they define in the contract. Thus, if they do not
-configure their serializers properly (to ignore unknown fields), then their tests pass
-but their integrations fail.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Congratulations! You have completed the producer side of this tutorial.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_consumer_flow_2">Consumer flow 2</h3>
-<div class="imageblock">
-<div class="content">
-<img src="../images/consumer_flow_2.png" alt="consumer flow 2">
-</div>
-<div class="title">Figure 8. Switch to work online</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>After merging the PR the producer&#8217;s stubs reside in some Artifactory / Nexus instance</p>
-</li>
-<li>
-<p>As consumers we no longer want to retrieve the stubs from our local Maven repository -
-we&#8217;d like to download them from the remote location</p>
-</li>
-<li>
-<p>To do that (we won&#8217;t do that for the tutorial but you would do it in your "production"
-code) it&#8217;s enough to pass the <code>repositoryRoot</code> parameter and set the
-<code>stubsMode</code> to <code>StubRunnerProperties.StubsMode.REMOTE</code></p>
-<div class="listingblock">
-<div class="content">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p>With mocks and RestAssured setup - we&#8217;re ready to run our HTTP based
+                                                autogenerated tests</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="paragraph">
+                        <p>Now you can merge the pull request to <code>master</code> and your CI system can build a fat jar and
+                            the stubs.</p>
+                    </div>
+                    <div class="admonitionblock important">
+                        <table>
+                            <tr>
+                                <td class="icon">
+                                    <div class="title">Important</div>
+                                </td>
+                                <td class="content">
+                                    Per consumer stubs is a powerful feature. On the producer side, if you want to
+                                    remove a field from the response, you can quickly verify if gets used. Try removing
+                                    the <code>surname</code> field from the <code>Response</code> class. You can see that the
+                                    generated <code>RestTest</code>
+                                    in the <code>bar-consumer</code> subfolder fails. That means that the
+                                    <code>bar-consumer</code> requires the
+                                    <code>surname</code> field and that you can&#8217;t safely remove it. On the other hand, in
+                                    production,
+                                    both consumers receive more fields than they define in the contract. Thus, if they do not
+                                    configure their serializers properly (to ignore unknown fields), then their tests pass
+                                    but their integrations fail.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="paragraph">
+                        <p>Congratulations! You have completed the producer side of this tutorial.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_consumer_flow_2">Consumer flow 2</h3>
+                <div class="imageblock">
+                    <div class="content">
+                        <img src="../images/consumer_flow_2.png" alt="consumer flow 2">
+                    </div>
+                    <div class="title">Figure 8. Switch to work online</div>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p>After merging the PR the producer&#8217;s stubs reside in some Artifactory / Nexus instance</p>
+                        </li>
+                        <li>
+                            <p>As consumers we no longer want to retrieve the stubs from our local Maven repository -
+                                we&#8217;d like to download them from the remote location</p>
+                        </li>
+                        <li>
+                            <p>To do that (we won&#8217;t do that for the tutorial but you would do it in your "production"
+                                code) it&#8217;s enough to pass the <code>repositoryRoot</code> parameter and set the
+                                <code>stubsMode</code> to <code>StubRunnerProperties.StubsMode.REMOTE</code></p>
+                            <div class="listingblock">
+                                <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -1790,44 +1903,46 @@ stubsMode = StubRunnerProperties.StubsMode.REMOTE
 @DirtiesContext
 public class YourTestOnTheConsumerSide extends AbstractTest {
 }</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Another option is to pass the property <code>stubrunner.repositoryRoot</code> either as a
-system / environment property, or via an <code>application.yml</code> and <code>stubrunner.stubs-mode</code>
-equal to <code>remote</code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_generating_documentation_from_contracts">Generating documentation from contracts</h3>
-<div class="paragraph">
-<p>Another feature of Spring Cloud Contract is an option to easily create the documentation
-of the whole API of the producer. You can create the following test that will generate a
-<code>contracts.adoc</code> file under <code>target/generated-snippets/</code> with description of contracts and
-with the contract bodies as such.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-This test is a poor man&#8217;s version of the documentation generation. You can customize
-it as you wish - the current version is just to show you an example.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
+                                </div>
+                            </div>
+                            <div class="ulist">
+                                <ul>
+                                    <li>
+                                        <p>Another option is to pass the property <code>stubrunner.repositoryRoot</code> either as
+                                            a
+                                            system / environment property, or via an <code>application.yml</code> and <code>stubrunner.stubs-mode</code>
+                                            equal to <code>remote</code></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_generating_documentation_from_contracts">Generating documentation from contracts</h3>
+                <div class="paragraph">
+                    <p>Another feature of Spring Cloud Contract is an option to easily create the documentation
+                        of the whole API of the producer. You can create the following test that will generate a
+                        <code>contracts.adoc</code> file under <code>target/generated-snippets/</code> with description of
+                        contracts and
+                        with the contract bodies as such.</p>
+                </div>
+                <div class="admonitionblock tip">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <div class="title">Tip</div>
+                            </td>
+                            <td class="content">
+                                This test is a poor man&#8217;s version of the documentation generation. You can customize
+                                it as you wish - the current version is just to show you an example.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">package docs;
 
 import org.junit.Test;
@@ -1946,18 +2061,18 @@ public class GenerateAdocsFromContractsTests {
 		}
 	}
 }</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_solutions">Solutions</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_written_consumer_tests">Written consumer tests</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="_solutions">Solutions</h2>
+        <div class="sectionbody">
+            <div class="sect2">
+                <h3 id="_written_consumer_tests">Written consumer tests</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">	@Test public void should_give_me_a_beer_when_im_old_enough() throws Exception {
 		//remove::start[]
 		mockMvc.perform(MockMvcRequestBuilders.post("/beer")
@@ -1977,36 +2092,36 @@ public class GenerateAdocsFromContractsTests {
 				.andExpect(content().string("GET LOST"));
 		//remove::end[]
 	}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_adding_spring_cloud_contract_dependency">Adding Spring Cloud Contract Dependency</h3>
-<div class="listingblock primary">
-<div class="title">Maven</div>
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_adding_spring_cloud_contract_dependency">Adding Spring Cloud Contract Dependency</h3>
+                <div class="listingblock primary">
+                    <div class="title">Maven</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
 	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
 	&lt;artifactId&gt;spring-cloud-starter-contract-verifier&lt;/artifactId&gt;
 	&lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">testCompile("org.springframework.cloud:spring-cloud-starter-contract-verifier")</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_proposal_of_simple_contracts_by_consumer">Proposal of simple contracts by consumer</h3>
-<div class="paragraph">
-<p><strong>HTTP communication</strong></p>
-</div>
-<div class="listingblock primary">
-<div class="title">Old Enough</div>
-<div class="content">
+                    </div>
+                </div>
+                <div class="listingblock secondary">
+                    <div class="title">Gradle</div>
+                    <div class="content">
+                        <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">testCompile("org.springframework.cloud:spring-cloud-starter-contract-verifier")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_proposal_of_simple_contracts_by_consumer">Proposal of simple contracts by consumer</h3>
+                <div class="paragraph">
+                    <p><strong>HTTP communication</strong></p>
+                </div>
+                <div class="listingblock primary">
+                    <div class="title">Old Enough</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">// rest/shouldGrantABeerIfOldEnough.groovy
 org.springframework.cloud.contract.spec.Contract.make {
 		description("""
@@ -2045,11 +2160,11 @@ then:
 		}
 	}
 }</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Too Young</div>
-<div class="content">
+                    </div>
+                </div>
+                <div class="listingblock secondary">
+                    <div class="title">Too Young</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">// rest/shouldRejectABeerIfTooYoung.groovy
 org.springframework.cloud.contract.spec.Contract.make {
 		description("""
@@ -2088,14 +2203,14 @@ then:
 		}
 	}
 }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Messaging communication</strong></p>
-</div>
-<div class="listingblock primary">
-<div class="title">Positive Verification</div>
-<div class="content">
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <p><strong>Messaging communication</strong></p>
+                </div>
+                <div class="listingblock primary">
+                    <div class="title">Positive Verification</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">// messaging/shouldSendAcceptedVerification.groovy
 org.springframework.cloud.contract.spec.Contract.make {
 	description("""
@@ -2126,11 +2241,11 @@ then:
 		}
 	}
 }</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Negative Verification</div>
-<div class="content">
+                    </div>
+                </div>
+                <div class="listingblock secondary">
+                    <div class="title">Negative Verification</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">// messaging/shouldSendRejectedVerification.groovy
 org.springframework.cloud.contract.spec.Contract.make {
 	description("""
@@ -2161,13 +2276,13 @@ then:
 		}
 	}
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_missing_consumer_controller_code">Missing consumer controller code</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_missing_consumer_controller_code">Missing consumer controller code</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">		ResponseEntity&lt;Response&gt; response = this.restTemplate.exchange(
 				RequestEntity
 						.post(URI.create("http://localhost:" + port + "/check"))
@@ -2180,13 +2295,13 @@ then:
 		default:
 			return "GET LOST";
 		}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_stub_logs">Stub Logs</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_stub_logs">Stub Logs</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">2017-05-11 12:16:51.146  INFO 4693 --- [           main] o.s.c.c.s.StubDownloaderBuilderProvider  : Will download stubs using Aether
 2017-05-11 12:16:51.148  INFO 4693 --- [           main] o.s.c.c.stubrunner.AetherStubDownloader  : Remote repos not passed but the switch to work offline was set. Stubs will be used from your local Maven repository.
 2017-05-11 12:16:51.291  INFO 4693 --- [           main] o.s.c.c.stubrunner.AetherStubDownloader  : Desired version is [+] - will try to resolve the latest version
@@ -2206,13 +2321,13 @@ then:
 2017-05-11 12:16:53.000  INFO 4693 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'admin' to [/__admin/*]
 2017-05-11 12:16:53.135  INFO 4693 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8090 (http)
 2017-05-11 12:16:53.139  INFO 4693 --- [           main] o.s.c.contract.stubrunner.StubServer     : Started stub server for project [com.example:{producer_artifact}:0.0.1-SNAPSHOT:stubs] on port 8090</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_beer_request">Beer Request</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_beer_request">Beer Request</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">class BeerRequest {
 	public int age;
 
@@ -2223,25 +2338,25 @@ then:
 	public BeerRequest() {
 	}
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_missing_listener_code">Missing listener code</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_missing_listener_code">Missing listener code</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">		if (verification.eligible) {
 			eligibleCounter.incrementAndGet();
 		} else {
 			notEligibleCounter.incrementAndGet();
 		}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_missing_triggers">Missing triggers</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_missing_triggers">Missing triggers</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">	@Test public void should_increase_the_eligible_counter_when_verification_was_accepted() throws Exception {
 		int initialCounter = listener.eligibleCounter.get();
 
@@ -2261,14 +2376,14 @@ then:
 
 		then(listener.notEligibleCounter.get()).isGreaterThan(initialCounter);
 	}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_messaging_dsls">Messaging DSLs</h3>
-<div class="listingblock primary">
-<div class="title">Positive Verification</div>
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_messaging_dsls">Messaging DSLs</h3>
+                <div class="listingblock primary">
+                    <div class="title">Positive Verification</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">// messaging/shouldSendAcceptedVerification.groovy
 org.springframework.cloud.contract.spec.Contract.make {
 	description("""
@@ -2304,11 +2419,11 @@ then:
 		}
 	}
 }</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Negative Verification</div>
-<div class="content">
+                    </div>
+                </div>
+                <div class="listingblock secondary">
+                    <div class="title">Negative Verification</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">// messaging/shouldSendRejectedVerification.groovy
 org.springframework.cloud.contract.spec.Contract.make {
 	description("""
@@ -2344,24 +2459,24 @@ then:
 		}
 	}
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_producercontroller_implementation">ProducerController implementation</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_producercontroller_implementation">ProducerController implementation</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">if (personCheckingService.shouldGetBeer(personToCheck)) {
     return new Response(BeerCheckStatus.OK);
 }
 return new Response(BeerCheckStatus.NOT_OK);</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_beerrestbase">BeerRestBase</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_beerrestbase">BeerRestBase</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@RunWith(MockitoJUnitRunner.class)
 public abstract class BeerRestBase {
 	@Mock PersonCheckingService personCheckingService;
@@ -2385,13 +2500,13 @@ public abstract class BeerRestBase {
 		};
 	}
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_beermessagingbase">BeerMessagingBase</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_beermessagingbase">BeerMessagingBase</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProducerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @AutoConfigureMessageVerifier
@@ -2414,24 +2529,24 @@ public abstract class BeerMessagingBase {
 		personCheckingService.shouldGetBeer(new PersonToCheck(5));
 	}
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_messaging_implementation">Messaging implementation</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_messaging_implementation">Messaging implementation</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">		boolean shouldGetBeer = personToCheck.age &gt;= 20;
 		source.output().send(MessageBuilder.withPayload(new Verification(shouldGetBeer)).build());
 		return shouldGetBeer;</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_foo_consumer_contracts">Foo-consumer contracts</h3>
-<div class="listingblock primary">
-<div class="title">Successful</div>
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_foo_consumer_contracts">Foo-consumer contracts</h3>
+                <div class="listingblock primary">
+                    <div class="title">Successful</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents a successful scenario of getting a beer
@@ -2469,11 +2584,11 @@ then:
         }
     }
 }</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Unsuccessful</div>
-<div class="content">
+                    </div>
+                </div>
+                <div class="listingblock secondary">
+                    <div class="title">Unsuccessful</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents an unsuccessful scenario of getting a beer
@@ -2511,14 +2626,14 @@ then:
         }
     }
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_bar_consumer_contracts">Bar-consumer contracts</h3>
-<div class="listingblock primary">
-<div class="title">Successful</div>
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_bar_consumer_contracts">Bar-consumer contracts</h3>
+                <div class="listingblock primary">
+                    <div class="title">Successful</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents a successful scenario of getting a beer
@@ -2556,11 +2671,11 @@ then:
         }
     }
 }</code></pre>
-</div>
-</div>
-<div class="listingblock secondary">
-<div class="title">Unsuccessful</div>
-<div class="content">
+                    </div>
+                </div>
+                <div class="listingblock secondary">
+                    <div class="title">Unsuccessful</div>
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">org.springframework.cloud.contract.spec.Contract.make {
     description("""
 Represents an unsuccessful scenario of getting a beer
@@ -2598,13 +2713,13 @@ then:
         }
     }
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_stubs_per_consumer_beercontroller">Stubs Per Consumer BeerController</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_stubs_per_consumer_beercontroller">Stubs Per Consumer BeerController</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">		ResponseEntity&lt;Response&gt; response = this.restTemplate.exchange(
 				RequestEntity
 						.post(URI.create("http://localhost:" + port + "/check"))
@@ -2617,30 +2732,31 @@ then:
 		default:
 			return "GET LOST " + message(response.getBody());
 		}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_producercontroller_for_stubs_per_consumer_implementation">ProducerController for stubs per consumer implementation</h3>
-<div class="listingblock">
-<div class="content">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="_producercontroller_for_stubs_per_consumer_implementation">ProducerController for stubs per consumer
+                    implementation</h3>
+                <div class="listingblock">
+                    <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">if (personCheckingService.shouldGetBeer(personToCheck)) {
     return new Response(BeerCheckStatus.OK, personToCheck.name);
 }
 return new Response(BeerCheckStatus.NOT_OK, personToCheck.name);</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_back_to_the_main_page">Back to the Main Page</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><a href="../workshops.html">Click here to go back to the main page</a></p>
-</div>
-</div>
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="_back_to_the_main_page">Back to the Main Page</h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p><a href="../workshops.html">Click here to go back to the main page</a></p>
+            </div>
+        </div>
+    </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>

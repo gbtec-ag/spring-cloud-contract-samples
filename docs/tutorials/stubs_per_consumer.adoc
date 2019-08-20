@@ -562,7 +562,7 @@ our contracts, as shown in the following example:
         <baseClassMappings>
             <baseClassMapping>
                 <contractPackageRegex>.*rest.*</contractPackageRegex>
-                <baseClassFQN>com.example.BeerRestBase</baseClassFQN>
+                <baseClassFQN>com.example.rest.BeerRestBase</baseClassFQN>
             </baseClassMapping>
         </baseClassMappings>
     </configuration>
@@ -574,7 +574,7 @@ our contracts, as shown in the following example:
 ----
 contracts {
 	baseClassMappings {
-		baseClassMapping(".*rest.*", "com.example.BeerRestBase")
+		baseClassMapping(".*rest.*", "com.example.rest.BeerRestBase")
 	}
 }
 ----

@@ -100,7 +100,7 @@
 						</baseClassMapping>
 						<baseClassMapping>
 							<contractPackageRegex>.*rest.*</contractPackageRegex>
-							<baseClassFQN>com.example.BeerRestBase</baseClassFQN>
+							<baseClassFQN>com.example.rest.BeerRestBase</baseClassFQN>
 						</baseClassMapping>
 					</baseClassMappings>
 					<packageWithBaseClasses>com.example</packageWithBaseClasses>
